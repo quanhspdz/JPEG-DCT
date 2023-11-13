@@ -94,8 +94,22 @@ else:
     # Lưu tệp ảnh giải nén
     cv2.imwrite('decompressed_image.jpg', decompressed_image)
 
-    # Vẽ biểu đồ 2D cho các hệ số DCT
-    plt.imshow(np.log(np.abs(compressed_image)), cmap='gray', interpolation='none')
-    plt.title("Biểu đồ 2D của các hệ số DCT")
-    plt.colorbar()
+    # Ensure that pixel values are in the correct range (0-255)
+    original_image = original_image.astype('uint8')
+    decompressed_image = decompressed_image.astype('uint8')
+
+    plt.figure(figsize=(12, 6))  # Adjust the figure size as needed
+
+    # Plotting the original image
+    plt.subplot(1, 2, 1)
+    plt.imshow(original_image)
+    plt.title('Original Image')
+    plt.xticks([]), plt.yticks([])
+
+    # Plotting the decompressed image
+    plt.subplot(1, 2, 2)
+    plt.imshow(decompressed_image)
+    plt.title('Image after decompression')
+    plt.xticks([]), plt.yticks([])
+
     plt.show()
